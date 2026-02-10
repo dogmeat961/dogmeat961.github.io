@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose: #c9374a;
+            --rose-dark: #a82d3e;
+            --rose-light: #ffe4ec;
+            --rose-glow: rgba(201,55,74,0.35);
+            --plum: #6b3a7d;
+            --plum-dark: #4a2060;
+            --gold: #d4a843;
+            --ink: #2c1810;
+            --paper: #fffaf5;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Lora', Georgia, serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(160deg, #2c1b3d 0%, #1a0e2e 40%, #2d1228 100%);
+            color: var(--ink);
+        }
+        
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            will-change: transform;
+            animation: floatUp 8s infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            background: var(--paper);
+            border-radius: 32px;
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 92%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            text-align: center;
+            animation: fadeInScale 1s ease-out;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .tenor-gif-embed {
+            max-width: 200px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        h1 {
+            font-family: var(--font-display);
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--rose);
+            margin-bottom: 16px;
+            animation: heartbeat 2.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(1.05);
+            }
+            20%, 40% {
+                transform: scale(1);
+            }
+        }
+        
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.5em;
+            color: var(--ink);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .message {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--ink);
+            margin-bottom: 40px;
+            padding: 24px;
+            background: linear-gradient(135deg, var(--rose-light) 0%, #fff0f4 100%);
+            border-radius: 16px;
+            border-left: 4px solid var(--rose);
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            padding: 16px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        
+        .btn-yes {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px var(--rose-glow);
+        }
+        
+        .btn-no {
+            background: linear-gradient(135deg, #999 0%, #666 100%);
+            color: white;
+            position: absolute;
+        }
+        
+        .btn-no:hover {
+            /* No hover effect - it will run away! */
+        }
+        
+        /* Celebration styles */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            will-change: transform;
+            animation: confettiFall 3s linear forwards;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 50;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .celebration.show {
+            display: flex;
+        }
+        
+        .celebration-content {
+            background: var(--paper);
+            padding: 50px;
+            border-radius: 24px;
+            text-align: center;
+            animation: fadeInScale 0.5s ease-out;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .celebration-content h2 {
+            font-family: var(--font-display);
+            font-size: 2.5em;
+            color: var(--rose);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .celebration-emoji {
+            font-size: 6em;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .celebration-message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+            color: white;
+            padding: 16px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--rose-glow);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 24px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .message {
+                font-size: 1em;
+                padding: 18px;
+            }
+            
+            .btn {
+                padding: 14px 32px;
+                font-size: 1em;
+            }
+            
+            .rose-emoji {
+                font-size: 3.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+    
+    <div class="container">
+        <div class="tenor-gif-embed" data-postid="3764730763306755247" data-share-method="host" data-aspect-ratio="1.09453" data-width="100%"><a href="https://tenor.com/view/hamiboom-gif-3764730763306755247">Hamiboom Sticker</a>from <a href="https://tenor.com/search/hamiboom-stickers">Hamiboom Stickers</a></div>
+        <h1>Will You Be My Valentine?</h1>
+        <p class="subtitle">A question from my heart to yours...</p>
+        
+        <div class="message">
+            Every moment with you is a gift. You make my world brighter, my heart fuller, and my life more beautiful. I want to celebrate this Valentine's Day with the most amazing person I know... you! 💕
+        </div>
+        
+        <div class="button-container">
+            <button class="btn btn-yes" onclick="sayYes()">Yes!</button>
+            <button class="btn btn-no" id="noBtn" onmouseover="runAway()" onclick="runAway()">No</button>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration">
+        <div class="celebration-content">
+            <div class="tenor-gif-embed" data-postid="7165748352338532147" data-share-method="host" data-aspect-ratio="1.04762" data-width="100%" style="max-width:250px;margin:0 auto;"><a href="https://tenor.com/view/hamiboom-gif-7165748352338532147">Hamiboom Sticker</a>from <a href="https://tenor.com/search/hamiboom-stickers">Hamiboom Stickers</a></div>
+            <h2>You Said Yes!</h2>
+            <p class="celebration-message">
+                You've made me the happiest person in the world!<br><br>
+                I have something special prepared just for you, hehehe...
+            </p>
+            <button class="btn-continue" onclick="goToValentine()">See Your Surprise!</button>
+        </div>
+    </div>
+    
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <script>
+        // Create floating hearts background
+        function createFloatingHeart() {
+            var heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.textContent = Math.random() > 0.5 ? '❤️' : '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('heartsBg').appendChild(heart);
+            
+            setTimeout(function() {
+                heart.remove();
+            }, 11000);
+        }
+        
+        // Create hearts continuously
+        setInterval(createFloatingHeart, 800);
+        for (var i = 0; i < 10; i++) {
+            setTimeout(createFloatingHeart, i * 300);
+        }
+        
+        // Make "No" button run away
+        var noBtn = document.getElementById('noBtn');
+        var runCount = 0;
+        
+        function runAway() {
+            runCount++;
+            
+            // Get viewport dimensions
+            var maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            var maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            // Random position
+            var randomX = Math.random() * maxX;
+            var randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Change text after a few attempts
+            if (runCount === 3) {
+                noBtn.textContent = "Please?";
+            } else if (runCount === 5) {
+                noBtn.textContent = "Come on!";
+            } else if (runCount === 7) {
+                noBtn.style.display = 'none'; // Give up, hide the button
+            }
+        }
+        
+        // Handle "Yes" button
+        function sayYes() {
+            // Show celebration overlay
+            document.getElementById('celebration').classList.add('show');
+            
+           
+        }
+        
+        // Go to main Valentine page
+        function goToValentine() {
+            window.location.href = 'valentines.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Treasure 💎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose: #c9374a; --rose-dark: #a82d3e; --rose-light: #ffe4ec;
+            --rose-glow: rgba(201,55,74,0.35); --plum: #6b3a7d; --plum-dark: #4a2060;
+            --gold: #d4a843; --gold-light: #fff3d4; --ink: #2c1810; --ink-light: #5a4238;
+            --paper: #fffaf5; --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Lora', Georgia, serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body); min-height: 100vh; display: flex;
+            justify-content: center; align-items: center; overflow-x: hidden; position: relative;
+            background: linear-gradient(160deg, #2c1b3d 0%, #1a0e2e 40%, #2d1228 100%);
+            color: var(--ink);
+        }
+        .sparkles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .sparkle { position: absolute; font-size: 2em; opacity: 0; will-change: transform; animation: sparkleFloat 3s infinite; }
+        @keyframes sparkleFloat {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 1; } 90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+        .confetti { position: fixed; width: 10px; height: 10px; will-change: transform; animation: confettiFall 3s linear forwards; pointer-events: none; z-index: 2; }
+        @keyframes confettiFall { 0% { transform: translateY(-100px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+        @keyframes floatUp { 0% { transform: translateY(0); opacity: 0.7; } 100% { transform: translateY(-110vh); opacity: 0; } }
+        .container {
+            position: relative; z-index: 10; background: var(--paper); border-radius: 24px;
+            padding: 50px 36px; max-width: 760px; width: 92%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5); text-align: center; animation: revealTreasure 1.2s ease-out;
+        }
+        @keyframes revealTreasure { 0% { opacity: 0; transform: scale(0.6) rotateY(180deg); } 100% { opacity: 1; transform: scale(1) rotateY(0deg); } }
+        .treasure-icon { font-size: 8em; animation: treasurePulse 2s infinite; margin: 16px 0; }
+        @keyframes treasurePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        h1 { font-family: var(--font-display); font-size: 2.6em; color: var(--rose); margin: 24px 0 16px; animation: glow 2s ease-in-out infinite; font-weight: 700; }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 8px rgba(201,55,74,0.4); } 50% { text-shadow: 0 0 18px rgba(201,55,74,0.7), 0 0 28px rgba(201,55,74,0.5); } }
+        .message { font-size: 1.05em; line-height: 2; color: var(--ink); margin: 24px 0; padding: 24px 28px; background: linear-gradient(135deg, var(--rose-light) 0%, #fff0f4 100%); border-radius: 16px; border-left: 4px solid var(--rose); text-align: left; }
+        .reward-box { margin: 32px 0; padding: 32px; background: linear-gradient(135deg, var(--gold) 0%, #e6c14f 100%); border-radius: 20px; box-shadow: 0 8px 24px rgba(212,168,67,0.35); animation: rewardShine 3s ease-in-out infinite; }
+        @keyframes rewardShine { 0%, 100% { box-shadow: 0 8px 24px rgba(212,168,67,0.35); } 50% { box-shadow: 0 12px 36px rgba(212,168,67,0.6); } }
+        .reward-box h2 { font-family: var(--font-display); color: var(--rose-dark); font-size: 2em; margin-bottom: 16px; font-weight: 700; }
+        .reward-icon { font-size: 4em; margin: 16px 0; }
+        .reward-item { background: rgba(255,255,255,0.5); padding: 14px 18px; margin: 10px 0; border-radius: 10px; display: flex; align-items: flex-start; gap: 12px; text-align: left; }
+        .reward-item-icon { font-size: 1.5em; flex-shrink: 0; }
+        .reward-item strong { color: var(--rose-dark); }
+        .envelope { background: white; padding: 28px; border-radius: 16px; margin: 28px 0; border: 3px solid var(--rose); }
+        .envelope-content { font-size: 1em; line-height: 1.9; color: var(--ink); text-align: left; }
+        .signature { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: 1.8em; color: var(--rose); margin-top: 24px; text-align: right; }
+        .back-button { margin-top: 32px; padding: 14px 36px; font-size: 1.1em; border: none; border-radius: 40px; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,0.2); background: linear-gradient(135deg, var(--plum) 0%, var(--plum-dark) 100%); color: white; }
+        .back-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(107,58,125,0.4); }
+        .heart-burst { position: fixed; pointer-events: none; animation: heartBurst 0.8s ease-out forwards; z-index: 100; }
+        @keyframes heartBurst { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+        .ps-note { margin-top: 24px; color: var(--ink-light); font-style: italic; font-size: 0.9em; }
+        @media (max-width: 600px) { .container { padding: 32px 18px; } h1 { font-size: 1.9em; } .treasure-icon { font-size: 5em; } .message { font-size: 0.95em; padding: 18px; } .reward-box { padding: 20px; } .reward-box h2 { font-size: 1.5em; } .reward-icon { font-size: 2em; } }
+    </style>
+</head>
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    <div class="container">
+        <div class="treasure-icon">💎</div>
+        <h1>YOU FOUND THE TREASURE!</h1>
+        <div class="message">
+            Congratulations, my love! You completed the entire treasure hunt, like a big boy!<br><br>
+            Just like you followed each clue to find this treasure, you found your way into my heart.
+            Every step of this journey represents the beautiful path we've walked together.<br><br>
+            You got tricked though because YOU!, yes YOU!, are my greatest treasure, my most precious gift, and the love of my life.
+        </div>
+        <div class="reward-box">
+            <h2>Your Special Reward</h2>
+            <div class="reward-icon">(づ ᴗ _ᴗ)づ🎁</div>
+            <div style="font-size:1.3em;font-weight:bold;color:var(--rose-dark);margin:16px 0;font-family:var(--font-display)">A Romantic Date Night With Yours Truly, The Rat King👑</div>
+            <div class="reward-item"><span class="reward-item-icon">🌹</span><div><strong>A bouquet of flowers for my flower</strong><br>Delivered with love of course!</div></div>
+            <div class="reward-item"><span class="reward-item-icon">🍽️</span><div><strong>Dinner at your favorite restaurant</strong><br>Or chicken wings in the air fryer, your choice!</div></div>
+            <div class="reward-item"><span class="reward-item-icon">🎬</span><div><strong>Shrek 2!</strong><br>According to Google, Shrek 2 is a romantic movie!</div></div>
+            <div class="reward-item"><span class="reward-item-icon">💌</span><div><strong>A computer typed love letter</strong><br>Sealed with a kiss, don't worry about that smudge on my monitor</div></div>
+        </div>
+        <div class="envelope">
+            <div class="envelope-content">
+                <strong style="font-size:1.2em;color:var(--rose);display:block;margin-bottom:16px;font-family:var(--font-display)">A Final Message From The Heart</strong>
+                My Dearest Love,<br><br>
+                Every moment I spend with you feels like finding treasure. Your smile is my gold, your laugh is my diamond, and your love is the most precious thing I've ever found.<br><br>
+                Thank you for being patient with this little treasure hunt. I wanted to create something special for you, something that shows how much effort and love I'm willing to put in just to see you smile.<br><br>
+                You complete me in ways I never knew were possible. You're my partner, my best friend, my confidant, and my everything. I can't wait to spend my life with you.<br><br>
+                You have all my love, now and forever,
+                <div class="signature">Sebastian (˶˘ ³˘(´͈ ᵕ `͈˶)</div>
+            </div>
+        </div>
+        <button class="back-button" onclick="window.location.href='valentines.html'">Back to the Website</button>
+        <p class="ps-note">P.S. - You can revisit this page anytime by clicking the treasure indicator when you have all clues!</p>
+    </div>
+    <script>
+        var isMobile = window.innerWidth < 600;
+        var colors = ['#c9374a','#d4a843','#6b3a7d','#ff6b6b','#4ecdc4'];
+        function createSparkle() { var s = document.createElement('div'); s.classList.add('sparkle'); s.textContent = ['✨','⭐','💫','🌟'][Math.floor(Math.random()*4)]; s.style.left = Math.random()*100+'%'; s.style.animationDelay = Math.random()*3+'s'; s.style.animationDuration = (Math.random()*2+2)+'s'; document.getElementById('sparkles').appendChild(s); setTimeout(function(){s.remove();},5000); }
+        setInterval(createSparkle, isMobile ? 500 : 250);
+        function createConfetti() { var c = document.createElement('div'); c.classList.add('confetti'); c.style.left = Math.random()*100+'%'; c.style.background = colors[Math.floor(Math.random()*colors.length)]; c.style.animationDelay = Math.random()*2+'s'; document.body.appendChild(c); setTimeout(function(){c.remove();},3000); }
+        for (var i = 0; i < (isMobile?25:50); i++) { setTimeout(createConfetti, i*80); }
+        setInterval(function(){ for(var j=0;j<(isMobile?1:3);j++) createConfetti(); }, 3000);
+        document.addEventListener('click', function(e) { var h = document.createElement('div'); h.textContent = '❤️'; h.classList.add('heart-burst'); h.style.left = e.clientX+'px'; h.style.top = e.clientY+'px'; h.style.fontSize = '2.5em'; document.body.appendChild(h); setTimeout(function(){h.remove();},800); });
+        function createFloatingHeart() { var h = document.createElement('div'); h.style.cssText = 'position:fixed;left:'+Math.random()*100+'%;bottom:-50px;font-size:1.8em;opacity:0.6;pointer-events:none;z-index:100;animation:floatUp 5s ease-in forwards;'; h.textContent = '❤️'; document.body.appendChild(h); setTimeout(function(){h.remove();},5000); }
+        setInterval(createFloatingHeart, isMobile ? 1500 : 800);
+    </script>
+</body>
+</html>
