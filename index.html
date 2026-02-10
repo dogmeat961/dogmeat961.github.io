@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💕</title>
+    <title>Will You Be My Valentine?</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -184,6 +184,15 @@
             box-shadow: 0 8px 24px var(--rose-glow);
         }
         
+        .btn-no {
+            background: linear-gradient(135deg, #999 0%, #666 100%);
+            color: white;
+            position: absolute;
+        }
+        
+        .btn-no:hover {
+            /* No hover effect - it will run away! */
+        }
         
         /* Celebration styles */
         .confetti {
@@ -299,6 +308,11 @@
             .rose-emoji {
                 font-size: 3.5em;
             }
+            
+            /* Hide No button on mobile */
+            .btn-no {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -355,7 +369,33 @@
             setTimeout(createFloatingHeart, i * 300);
         }
         
+        // Make "No" button run away
+        var noBtn = document.getElementById('noBtn');
+        var runCount = 0;
         
+        function runAway() {
+            runCount++;
+            
+            // Get viewport dimensions
+            var maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            var maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            // Random position
+            var randomX = Math.random() * maxX;
+            var randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Change text after a few attempts
+            if (runCount === 3) {
+                noBtn.textContent = "Please?";
+            } else if (runCount === 5) {
+                noBtn.textContent = "Come on!";
+            } else if (runCount === 7) {
+                noBtn.style.display = 'none'; // Give up, hide the button
+            }
+        }
         
         // Handle "Yes" button
         function sayYes() {
@@ -371,5 +411,4 @@
         }
     </script>
 </body>
-
 </html>
