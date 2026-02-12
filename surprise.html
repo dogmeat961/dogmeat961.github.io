@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .reveal {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 3s ease-in forwards;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .gift {
+            font-size: 100px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gift:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div id="step1">
+            <div class="emoji">🎭</div>
+            <h1>Happy Valentine's Day!</h1>
+            <div class="message">
+                You've been chosen for a very special Valentine's experience...
+            </div>
+            <button class="button" onclick="nextStep(2)">Continue</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <div class="emoji">🤔</div>
+            <h1>Quick Question...</h1>
+            <div class="message">
+                Do you believe in love at first sight?
+            </div>
+            <button class="button" onclick="nextStep(3)">Yes</button>
+            <button class="button" onclick="nextStep(3)">No</button>
+        </div>
+
+        <div id="step3" class="hidden">
+            <div class="emoji">⏰</div>
+            <h1>Calculating Your Results...</h1>
+            <div class="countdown" id="countdown">3</div>
+            <div class="message">Please wait while we process your romantic destiny...</div>
+        </div>
+
+        <div id="step4" class="hidden">
+            <div class="emoji">🎁</div>
+            <h1>You Have a Gift!</h1>
+            <div class="message">
+                Click the gift to unwrap your Valentine's surprise!
+            </div>
+            <div class="gift" onclick="nextStep(5)">🎁</div>
+        </div>
+
+        <div id="step5" class="hidden">
+            <div class="emoji">😂</div>
+            <h1>Congratulations!</h1>
+            <div class="message">
+                You've won absolutely nothing!<br><br>
+                But hey, you're still pretty cool.<br><br>
+                Happy Valentine's Day! 💜
+            </div>
+            <button class="button" onclick="spamHearts()">Celebrate</button>
+            <div class="footer">
+                Hope you enjoyed the journey 😄
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            // Hide all steps
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('step' + i).classList.add('hidden');
+            }
+            
+            // Show current step
+            const currentStep = document.getElementById('step' + step);
+            currentStep.classList.remove('hidden');
+            currentStep.classList.add('reveal');
+            
+            // Special handling for countdown step
+            if (step === 3) {
+                startCountdown();
+            }
+        }
+
+        function startCountdown() {
+            let count = 3;
+            const countdownEl = document.getElementById('countdown');
+            
+            const interval = setInterval(() => {
+                count--;
+                countdownEl.textContent = count;
+                
+                if (count === 0) {
+                    clearInterval(interval);
+                    setTimeout(() => nextStep(4), 500);
+                }
+            }, 1000);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = ['❤️', '💜', '💙', '💚', '💛'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        function spamHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createHeart(), i * 100);
+            }
+        }
+
+        // Add some random hearts in the background
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createHeart();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

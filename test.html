@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .emoji {
+            font-size: 60px;
+            margin: 20px 0;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #999;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Initial scan -->
+        <div class="step active" id="step1">
+            <div class="emoji">📱</div>
+            <h1>Random Code Scanned</h1>
+            <p>Initializing connection to important database...</p>
+            <div class="loading-spinner"></div>
+        </div>
+
+        <!-- Step 2: Loading -->
+        <div class="step" id="step2">
+            <h1>Processing Request</h1>
+            <p>Analyzing phone content...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <p class="small-text">Pixel 9,  This might take a moment</p>
+        </div>
+
+        <!-- Step 3: Verification -->
+        <div class="step" id="step3">
+            <div class="emoji">🤔</div>
+            <h1>Identity Verification</h1>
+            <p>We need to confirm you're authorized to view this content.</p>
+            <p>Are you Petra?</p>
+            <button onclick="nextStep()">Yes, that's me</button>
+        </div>
+
+        <!-- Step 4: Secondary check -->
+        <div class="step" id="step4">
+            <div class="emoji">🧐</div>
+            <h1>Additional Verification</h1>
+            <p>Just to be absolutely sure...</p>
+            <p>You sure?</p>
+            <button onclick="nextStep()">Yes, I'm very sure</button>
+        </div>
+
+        <!-- Step 5: Final check -->
+        <div class="step" id="step5">
+            <div class="emoji">🤨</div>
+            <h1>Final Confirmation</h1>
+            <p>Like, really really certain?</p>
+            <p>Because this is extreeeemely important.</p>
+            <button onclick="nextStep()">YES! It's me!</button>
+        </div>
+
+        <!-- Step 6: Okay fine -->
+        <div class="step" id="step6">
+            <div class="emoji">😏</div>
+            <h1>Alright, Alright</h1>
+            <p>I believe you.</p>
+            <p>Mostly.</p> 
+            <p>Bich</p>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+
+        <!-- Step 7: Loading important -->
+        <div class="step" id="step7">
+            <h1>Loading Very Important Message</h1>
+            <p>Decrypting content...</p>
+            <div class="loading-spinner"></div>
+            <p class="small-text">Preparing something special...</p>
+        </div>
+
+        <!-- Step 8: The reveal -->
+        <div class="step" id="step8">
+            <div class="heart">❤️</div>
+            <h1>Hey Cutie Patootie With A BIG Booty</h1>
+            <p class="final-message">Just wanted to remind you that you're absolutely amazing!</p>
+            <p>I know I give you a hard time sometimes, but that's just because I love you so gaddamn much and I don't know what else to do with myself!</p>
+            <p>You make every day better and I love being your fiancé and I can't wait to get married! Thank you for putting up with my silly shenanigans.</p>
+            <div class="heart">💕</div>
+            <p class="final-message">Love you soooooooooo much</p>
+            <p class="small-text">- Sebastian</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 8;
+
+        // Auto-advance from step 1 to step 2
+        setTimeout(() => {
+            if (currentStep === 1) {
+                nextStep();
+            }
+        }, 2000);
+
+        // Auto-advance from step 2 to step 3 with progress bar
+        function animateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        if (currentStep === 2) {
+                            nextStep();
+                        }
+                    }, 500);
+                }
+            }, 30);
+        }
+
+        // Auto-advance from step 7 to step 8
+        setTimeout(() => {
+            if (currentStep === 7) {
+                nextStep();
+            }
+        }, 3000);
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                currentStep++;
+                document.getElementById('step' + currentStep).classList.add('active');
+
+                // Trigger progress bar animation when entering step 2
+                if (currentStep === 2) {
+                    animateProgress();
+                }
+
+                // Auto-advance from step 7
+                if (currentStep === 7) {
+                    setTimeout(() => {
+                        nextStep();
+                    }, 3000);
+                }
+            }
+        }
+
+        // Set page title
+        document.title = "For My DBQ";
+    </script>
+</body>
+</html>
