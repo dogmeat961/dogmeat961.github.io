@@ -243,7 +243,7 @@
     var languages=["Words of Affirmation - I'll tell you I love you every day!","Receiving Gifts - Thoughtful surprises coming your way! (#huhyoucanclicktheheartatthetop?)","Quality Time - My undivided attention is yours if I can lock in!","Acts of Service - I'll make your life easier! ","Physical Touch - Hugs and closeness always!"];
     function selectLanguage(el,i){document.querySelectorAll('.language-option').forEach(function(o){o.classList.remove('selected')});el.classList.add('selected');var r=document.getElementById('languageResult');r.innerHTML='<strong style="color:var(--rose)">Your Love Language:</strong><br><br>'+languages[i];r.style.display='block';}
     function calculateLove(){var results=[{score:'102%',message:"Off the charts!"},{score:'100%',message:"Perfect match!"},{score:'∞',message:"Infinite love!"},{score:'150%',message:"Soulmates confirmed!"},{score:'9001',message:"It's Over 9000!!!"},{score:'You + Me',message:"Love 💕"}];var r=results[Math.floor(Math.random()*results.length)];document.getElementById('loveScore').textContent=r.score;document.getElementById('loveMessage').textContent=r.message;if(cluesFound.length===2)setTimeout(function(){foundClue(2)},1500);}
-    var fortunes=["A beautiful surprise awaits, if you follow the clues!","Your smile brings me so much joy!","Love leads us on amazing adventures!","The best is yet to come!","You are adored more than you know!","6 years down, a lifetime to go!","Happiness follows you everywhere!","You bring magic into my life!"];
+    var fortunes=["A beautiful surprise awaits, if you follow the clues!","What does that big heart do at the top of the page???","Your smile brings me so much joy!","Love leads us on amazing adventures!","The best is yet to come!","You are adored more than you know!","6 years down, a lifetime to go!","Happiness follows you everywhere!","You bring magic into my life!"];
     function crackCookie(){var cookie=document.getElementById('cookieVisual');var ft=document.getElementById('fortuneText');ft.textContent=fortunes[Math.floor(Math.random()*fortunes.length)];ft.classList.add('show');cookie.textContent='🍪';setTimeout(function(){cookie.textContent='🥠';ft.classList.remove('show')},5000);if(cluesFound.length===3)setTimeout(function(){foundClue(3)},2000);}
     var triviaQuestions=[{question:"My favourite hobby?",options:["3D Printing","Cooking","Photography","Gaming"],correct:3},{question:"Where do we live?",options:["Brazil","Pointe-Calumet","China","Your mom"],correct:1},{question:"Sebastian works with?",options:["Rockets, whoosh!","Teaching the retarded","Compupiters","Sale of illicit substances"],correct:2},{question:"What do I love about you?",options:["Your smile","Your stink","Your singing","Your Badonk","Everything!"],correct:4},{question:"Our relationship status?",options:["Dating","It's Complicated","Madly in Love","Secret"],correct:2}];
     var currentTriviaQuestion=0,triviaScore=0,triviaCompleted=false;
@@ -265,5 +265,6 @@
 </body>
 
 </html>
+
 
 
